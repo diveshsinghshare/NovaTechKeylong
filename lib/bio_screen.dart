@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'ghibliPhotoScreen.dart';
+import 'models/profile_singlaton.dart';
+import 'screens/on_boarding_screens/ghibliPhotoScreen.dart';
 class BioScreen extends StatelessWidget {
   final TextEditingController bioController = TextEditingController();
 
@@ -70,6 +71,7 @@ class BioScreen extends StatelessWidget {
                     // Handle continue tap
                     String bioText = bioController.text;
                     print("User Bio: $bioText");
+                    ProfileSingleton.instance.bio = bioText;
 
                     Navigator.push(context, MaterialPageRoute(builder: (_) => GhibliPhotoScreen()));
 

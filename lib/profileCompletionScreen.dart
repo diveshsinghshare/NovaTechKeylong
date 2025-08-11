@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'bio_screen.dart';
+import 'models/profile_singlaton.dart';
 class ProfileCompletionScreen extends StatelessWidget {
   const ProfileCompletionScreen({super.key});
 
@@ -70,12 +71,12 @@ class ProfileCompletionScreen extends StatelessWidget {
                       child: CircularProgressIndicator(
                         value: 0.6,
                         strokeWidth: 8,
-                        backgroundColor: Colors.pink[50],
+                        backgroundColor: Colors.pink.withOpacity(ProfileSingleton.instance.profileProgress / 100),
                         valueColor:
                         AlwaysStoppedAnimation<Color>(Colors.pinkAccent),
                       ),
                     ),
-                    Text("60%", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    Text("${ProfileSingleton.instance.profileProgress}%", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                   ],
                 ),
                 SizedBox(height: 24),

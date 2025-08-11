@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../models/profile_singlaton.dart';
 import 'mbti_screen.dart'; // Import the next screen
 
 class ReligiousBeliefScreen extends StatefulWidget {
@@ -93,6 +94,7 @@ class _ReligiousBeliefScreenState extends State<ReligiousBeliefScreen> {
                 child: Text("Continue", style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),
 
                 onPressed: () {
+                  ProfileSingleton.instance.religiousBeliefs = selected;
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => MBTIScreen()),

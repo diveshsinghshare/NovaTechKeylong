@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import '../../models/profile_singlaton.dart';
 import 'selectPromptScreen.dart';
 
 void main() {
@@ -61,6 +62,7 @@ class _GhibliPhotoScreenState extends State<GhibliPhotoScreen> {
     if (pickedFile != null) {
       setState(() {
         _selectedImages.add(File(pickedFile.path));
+        ProfileSingleton.instance.profileImages.add(File(pickedFile.path));
       });
     }
   }
@@ -68,6 +70,7 @@ class _GhibliPhotoScreenState extends State<GhibliPhotoScreen> {
   void _removeImage(int index) {
     setState(() {
       _selectedImages.removeAt(index);
+      ProfileSingleton.instance.profileImages.removeAt(index);
     });
   }
 

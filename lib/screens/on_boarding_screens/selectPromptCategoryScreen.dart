@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'subcategoryScreen.dart';
+import '../../subcategoryScreen.dart';
 
 class SelectPromptCategoryScreen extends StatelessWidget {
   final List<Map<String, dynamic>> categories = [

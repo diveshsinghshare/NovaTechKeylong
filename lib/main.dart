@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:intl/intl.dart';
-import 'package:novatech/phonenumber_screen.dart';
+import 'package:novatech/screens/on_boarding_screens/phonenumber_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() {
+
+  WidgetsFlutterBinding.ensureInitialized();
+   Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(NovaApp());
 }
 

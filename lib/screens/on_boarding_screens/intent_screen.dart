@@ -3,6 +3,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:intl/intl.dart';
 import 'package:novatech/welcome.dart';
+import '../../models/profile_singlaton.dart';
 import 'orientation_screen.dart';
 
 class IntentScreen extends StatefulWidget {
@@ -71,6 +72,8 @@ class _IntentScreenState extends State<IntentScreen> {
                 onPressed: selectedIntent == null
                     ? null
                     : () {
+                  ProfileSingleton.instance.intentions = selectedIntent ?? "";
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (_) => OrientationScreen()),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../models/profile_singlaton.dart';
 import 'emotionalTypeScreen.dart';
 class MBTIScreen extends StatefulWidget {
   @override
@@ -77,6 +78,8 @@ class _MBTIScreenState extends State<MBTIScreen> {
                 ),
                 child: Text("Continue", style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),
                 onPressed: () {
+                  ProfileSingleton.instance.mbti = selectedType ?? "";
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => EmotionalTypeScreen()),

@@ -1,14 +1,6 @@
-
 import 'package:flutter/material.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:intl/intl.dart';
-import 'package:novatech/welcome.dart';
-import 'interested_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'otp_screen.dart';
-import 'package:flutter/material.dart';
-import 'otp_screen.dart';
-
 class PhoneNumberScreen extends StatefulWidget {
   final bool isSignUp; // true = signup, false = signin
 
@@ -20,23 +12,61 @@ class PhoneNumberScreen extends StatefulWidget {
 
 class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
   final TextEditingController _phoneController = TextEditingController();
+  bool _isLoading = false;
 
-  void _getOtp() {
-    String phone = _phoneController.text.trim();
-    if (phone.length == 10) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => OTPScreen(
-            phoneNumber: phone,
-            isSignUp: widget.isSignUp, // pass the flow forward
-          ),
-        ),
-      );
-    } else {
+  Future<void> _getOtp() async {
+   // String phone = _phoneController.text.trim();
+
+    String phone = "9590456473";
+    if (phone.length != 10) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Please enter a valid 10-digit phone number')),
       );
+      return;
+    }
+
+    setState(() => _isLoading = true);
+
+    try {
+      await FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: "+91$phone",
+        timeout: const Duration(seconds: 60),
+
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          // Auto verification for some numbers
+          await FirebaseAuth.instance.signInWithCredential(credential);
+        },
+
+        verificationFailed: (FirebaseAuthException e) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Verification failed: ${e.message}')),
+          );
+        },
+
+        codeSent: (String verificationId, int? resendToken) {
+          // Navigate to OTP screen with verificationId
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => OTPScreen(
+                phoneNumber: phone,
+                isSignUp: widget.isSignUp,
+                verificationId: verificationId, // Pass it here
+              ),
+            ),
+          );
+        },
+
+        codeAutoRetrievalTimeout: (String verificationId) {
+          // Auto retrieval timeout
+        },
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error sending OTP: $e')),
+      );
+    } finally {
+      setState(() => _isLoading = false);
     }
   }
 
@@ -97,8 +127,10 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: _getOtp,
-                  child: Text("Get OTP", style: TextStyle(color: Colors.white)),
+                  onPressed: _isLoading ? null : _getOtp,
+                  child: _isLoading
+                      ? CircularProgressIndicator(color: Colors.white)
+                      : Text("Get OTP", style: TextStyle(color: Colors.white)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFF6B4668),
                     padding: EdgeInsets.symmetric(vertical: 16),

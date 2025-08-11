@@ -5,6 +5,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:intl/intl.dart';
 import 'package:novatech/welcome.dart';
+import '../../models/profile_singlaton.dart';
 import 'gender_screen.dart';
 class NameScreen extends StatefulWidget {
   @override
@@ -16,6 +17,8 @@ class _NameScreenState extends State<NameScreen> {
 
   void _onContinue() {
     if (_controller.text.trim().isNotEmpty) {
+      ProfileSingleton.instance.name =  _controller.text;
+
       Navigator.push(context, MaterialPageRoute(builder: (_) => GenderScreen()));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please enter your name")));

@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:novatech/welcome.dart';
 import 'interested_screen.dart';
 import 'location_screen.dart';
+import '../../models/profile_singlaton.dart';
 
 class BirthdayScreen extends StatefulWidget {
   @override
@@ -27,6 +28,11 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
           TextButton(onPressed: () => Navigator.pop(ctx), child: Text("Edit")),
           TextButton(
             onPressed: () {
+
+              final now = DateTime.now();
+              final birthYear = now.year - age;
+              ProfileSingleton.instance.dob =
+                  DateTime(birthYear, now.month, now.day).toIso8601String();
               Navigator.pop(ctx);
               Navigator.push(context, MaterialPageRoute(builder: (_) => LocationScreen()));
             },

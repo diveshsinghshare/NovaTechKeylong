@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../models/profile_singlaton.dart';
 import 'lifestyleHabitsScreen.dart';
 class InterestSelectionScreen extends StatefulWidget {
   @override
@@ -131,8 +132,9 @@ class _InterestSelectionScreenState extends State<InterestSelectionScreen> {
               ),
               onPressed: () {
                 // TODO: Navigate to next screen
+                ProfileSingleton.instance.selectedInterests = selectedInterests;
 
-                Navigator.push(context, MaterialPageRoute(builder: (_) => LifestyleHabitsScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => LifestyleHabitsScreen()));
 
               },
               child: Text("Continue", style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),

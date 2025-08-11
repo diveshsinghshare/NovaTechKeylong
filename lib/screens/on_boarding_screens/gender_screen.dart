@@ -4,6 +4,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:intl/intl.dart';
 import 'package:novatech/welcome.dart';
+import '../../models/profile_singlaton.dart';
 import 'interested_screen.dart';
 
 class GenderScreen extends StatefulWidget {
@@ -36,6 +37,8 @@ class _GenderScreenState extends State<GenderScreen> {
               onPressed: selected == null
                   ? null
                   : () {
+                ProfileSingleton.instance.gender = selected ?? "Men";
+
                 Navigator.push(context, MaterialPageRoute(builder: (_) => InterestedInScreen()));
               },
               child: Text("Continue", style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),

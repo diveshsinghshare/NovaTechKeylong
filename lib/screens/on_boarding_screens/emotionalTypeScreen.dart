@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../models/profile_singlaton.dart';
 import 'interestSelectionScreen.dart';
 class EmotionalTypeScreen extends StatefulWidget {
   @override
@@ -109,6 +110,9 @@ class _EmotionalTypeScreenState extends State<EmotionalTypeScreen> {
               ),
               onPressed: () {
                 // TODO: Add navigation
+
+                ProfileSingleton.instance.emotionalType = selectedTypes;
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => InterestSelectionScreen()),

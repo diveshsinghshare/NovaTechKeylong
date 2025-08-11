@@ -1,18 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:intl/intl.dart';
-import 'package:novatech/intent_screen.dart';
+import '../../models/profile_singlaton.dart';
 import 'name_screen.dart';
+
 class LocationScreen extends StatelessWidget {
   Future<void> _handlePermission(BuildContext context) async {
     final status = await Permission.location.request();
     if (status.isGranted) {
-      Navigator.push(context, MaterialPageRoute(builder: (_) => NameScreen()));
+      try {
+        // Get current location
+        Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high,
+        );
+
+        // Save to singleton
+        ProfileSingleton.instance.location =
+        "${position.latitude}, ${position.longitude}";
+
+        // Continue to next screen
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => NameScreen()),
+        );
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Failed to get location: $e")),
+        );
+      }
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Location permission denied")));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Location permission denied")),
+      );
     }
   }
+
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../models/profile_singlaton.dart';
 import 'select_height_screen.dart';
 class OrientationScreen extends StatefulWidget {
   @override
@@ -76,6 +77,7 @@ class _OrientationScreenState extends State<OrientationScreen> {
                   onChanged: (value) {
                     setState(() {
                       showOnProfile = value ?? false;
+                      ProfileSingleton.instance.showOrientationOnProfile = showOnProfile;
                     });
                   },
                   activeColor: Colors.purple,
@@ -87,6 +89,8 @@ class _OrientationScreenState extends State<OrientationScreen> {
             ElevatedButton(
               onPressed: () {
                 // Handle next step
+                ProfileSingleton.instance.sexualOrientation = selectedOptions;
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => SelectHeightScreen()),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'profileCompletionScreen.dart';
+import '../../models/profile_singlaton.dart';
+import '../../profileCompletionScreen.dart';
 class LifestyleHabitsScreen extends StatefulWidget {
   @override
   _LifestyleHabitsScreenState createState() => _LifestyleHabitsScreenState();
@@ -111,6 +112,9 @@ class _LifestyleHabitsScreenState extends State<LifestyleHabitsScreen> {
               ),
               onPressed: () {
                 // TODO: Navigate to next screen
+
+                ProfileSingleton.instance.selectedOptions = selectedOptions;
+
                 Navigator.push(context, MaterialPageRoute(builder: (_) => ProfileCompletionScreen()));
 
               },

@@ -1,13 +1,13 @@
 // routes.dart
 
 import 'package:flutter/material.dart';
-import 'screens/birthday_screen.dart';
-import 'screens/location_screen.dart';
-import 'screens/name_screen.dart';
-import 'screens/gender_screen.dart';
-import 'screens/interested_in_screen.dart';
-import 'screens/intent_screen.dart';
-import 'screens/welcome_screen.dart';
+import 'package:novatech/welcome.dart';
+import 'screens/on_boarding_screens/birthday_screen.dart';
+import 'screens/on_boarding_screens/location_screen.dart';
+import 'screens/on_boarding_screens/name_screen.dart';
+import 'screens/on_boarding_screens/gender_screen.dart';
+import 'screens/on_boarding_screens/intent_screen.dart';
+import 'screens/on_boarding_screens/interested_screen.dart';
 
 class AppRoutes {
   static const String birthday = '/birthday';

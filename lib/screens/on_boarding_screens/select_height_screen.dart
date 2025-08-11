@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'welcome.dart';
+import '../../models/profile_singlaton.dart';
+import '../../welcome.dart';
 import 'religious_belief_screen.dart';
 class SelectHeightScreen extends StatefulWidget {
   @override
@@ -69,6 +70,8 @@ class _SelectHeightScreenState extends State<SelectHeightScreen> {
             ElevatedButton(
               onPressed: selectedHeight != null ? () {
                 // Navigate to next screen
+                ProfileSingleton.instance.height = selectedHeight ?? "";
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ReligiousBeliefScreen()),
