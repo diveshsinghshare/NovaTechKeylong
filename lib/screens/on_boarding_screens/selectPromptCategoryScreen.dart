@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
-import '../../subcategoryScreen.dart';
+import 'subcategoryScreen.dart';
 
 class SelectPromptCategoryScreen extends StatelessWidget {
+
+  final int index;
+
+
+   SelectPromptCategoryScreen({
+    Key? key,
+    required this.index,
+  }) : super(key: key);
+
+
   final List<Map<String, dynamic>> categories = [
     {'icon': '💬', 'label': 'Conversations I Crave'},
     {'icon': '🫀', 'label': 'Deep Cuts'},
@@ -73,6 +83,7 @@ class SelectPromptCategoryScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => SubcategoryScreen(
+                        index:index,
                         title: label,
                         icon: data['icon'],
                         prompts: List<String>.from(data['prompts']),

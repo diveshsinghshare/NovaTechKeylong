@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:novatech/promptCategory.dart';
+
 class ProfileSingleton {
   ProfileSingleton._internal();
   static final ProfileSingleton _instance = ProfileSingleton._internal();
@@ -29,6 +31,11 @@ class ProfileSingleton {
   bool isVerifiedVideo = false;
   List<File> profileImages = [];
 
+  List<PromptQuestion> promptList = [
+    PromptQuestion(question: '', answer: '',index:0),
+    PromptQuestion(question: '', answer: '',index:1),
+    PromptQuestion(question: '', answer: '',index:2),
+  ];
 
   /// Computed property for profile completion percentage
   int get profileProgress {
@@ -71,4 +78,17 @@ class ProfileSingleton {
     isVerifiedPhoto = false;
     isVerifiedVideo = false;
   }
+}
+
+
+class PromptQuestion {
+   String question;
+   String answer;
+   int index;
+
+  PromptQuestion({
+    required this.question,
+    required this.answer,
+    required this.index,
+  });
 }

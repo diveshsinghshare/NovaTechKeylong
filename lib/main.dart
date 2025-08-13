@@ -5,6 +5,9 @@ import 'package:intl/intl.dart';
 import 'package:novatech/screens/on_boarding_screens/phonenumber_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:novatech/screens/on_boarding_screens/selectPromptScreen.dart';
+
+final RouteObserver<ModalRoute<void>> routeObserver = RouteObserver<ModalRoute<void>>();
 
 void main() {
 
@@ -16,6 +19,8 @@ void main() {
 }
 
 class NovaApp extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,6 +31,8 @@ class NovaApp extends StatelessWidget {
       ),
       home: OnboardingScreen(),
       debugShowCheckedModeBanner: false,
+      navigatorObservers: [routeObserver], // Attach observer
+
     );
   }
 }

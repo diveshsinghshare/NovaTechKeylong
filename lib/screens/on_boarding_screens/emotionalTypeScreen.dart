@@ -79,15 +79,17 @@ class _EmotionalTypeScreenState extends State<EmotionalTypeScreen> {
                         children: [
                           Text(item['icon']!, style: TextStyle(fontSize: 20)),
                           SizedBox(width: 12),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(item['title']!,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold, fontSize: 16)),
-                              Text(item['subtitle']!,
-                                  style: TextStyle(fontSize: 13, color: Colors.grey[600])),
-                            ],
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(item['title']!,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold, fontSize: 16)),
+                                Text(item['subtitle']!,
+                                    style: TextStyle(fontSize: 13, color: Colors.grey[600])),
+                              ],
+                            ),
                           ),
                           Spacer(),
                           if (isSelected)

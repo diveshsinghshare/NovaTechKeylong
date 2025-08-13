@@ -76,7 +76,7 @@ class _GhibliPhotoScreenState extends State<GhibliPhotoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final canContinue = _selectedImages.length >= 4;
+    final canContinue = _selectedImages.length >= 0;
 
     return Scaffold(
       appBar: AppBar(
