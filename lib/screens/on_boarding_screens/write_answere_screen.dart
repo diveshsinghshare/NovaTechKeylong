@@ -5,12 +5,14 @@ class WriteAnswerScreen extends StatefulWidget {
   final int index;
   final String question;
   final String answer;
+  final bool isPromtEditMode;
 
   const WriteAnswerScreen({
     super.key,
     required this.question,
     required this.answer,
     required this.index,
+    required this.isPromtEditMode,
   });
 
   @override
@@ -20,6 +22,7 @@ class WriteAnswerScreen extends StatefulWidget {
 class _WriteAnswerScreenState extends State<WriteAnswerScreen> {
   late TextEditingController _questionController;
   late TextEditingController _answerController;
+
 
   @override
   void initState() {
@@ -44,9 +47,14 @@ class _WriteAnswerScreenState extends State<WriteAnswerScreen> {
 
     ProfileSingleton.instance.promptList[widget.index] = promptQ;
 
+
+    Navigator.pop(context); // Go back to previous screen
+
+    if (widget.isPromtEditMode == false) {
     Navigator.pop(context); // Go back to previous screen
     Navigator.pop(context); // Go back to previous screen
-    Navigator.pop(context); // Go back to previous screen
+    }
+
   }
 
   @override

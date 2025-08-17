@@ -1,10 +1,12 @@
 
 import 'package:flutter/material.dart';
+import 'package:novatech/screens/on_boarding_screens/female_code_screen.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:intl/intl.dart';
 import 'package:novatech/welcome.dart';
 import '../../models/profile_singlaton.dart';
+import 'gentleman_code_screen.dart';
 import 'interested_screen.dart';
 
 class GenderScreen extends StatefulWidget {
@@ -37,9 +39,14 @@ class _GenderScreenState extends State<GenderScreen> {
               onPressed: selected == null
                   ? null
                   : () {
-                ProfileSingleton.instance.gender = selected ?? "Men";
+                ProfileSingleton.instance.gender = selected ?? "Man";
 
-                Navigator.push(context, MaterialPageRoute(builder: (_) => InterestedInScreen()));
+                if (selected == "Man") {
+                Navigator.push(context, MaterialPageRoute(builder: (_) => GentlemanCodeScreen()));
+                } else {
+                Navigator.push(context, MaterialPageRoute(builder: (_) => FemalePledgeScreen()));
+                }
+
               },
               child: Text("Continue", style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),
               style: ElevatedButton.styleFrom(

@@ -40,7 +40,7 @@ class SubcategoryScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (_) => WriteAnswerScreen(
-                        question: prompts[index], answer: "",index: index,
+                        question: prompts[index], answer: "",index: this.index,isPromtEditMode: false,
                       ),
                     ),
                   );

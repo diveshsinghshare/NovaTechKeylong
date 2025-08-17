@@ -15,9 +15,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
   bool _isLoading = false;
 
   Future<void> _getOtp() async {
-   // String phone = _phoneController.text.trim();
-
-    String phone = "9590456473";
+    String phone = "9590456473"; // use _phoneController.text.trim() in real case
     if (phone.length != 10) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Please enter a valid 10-digit phone number')),
@@ -27,13 +25,14 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
 
     setState(() => _isLoading = true);
 
+    final startTime = DateTime.now();
+
     try {
       await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: "+91$phone",
         timeout: const Duration(seconds: 60),
 
         verificationCompleted: (PhoneAuthCredential credential) async {
-          // Auto verification for some numbers
           await FirebaseAuth.instance.signInWithCredential(credential);
         },
 
@@ -43,29 +42,35 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
           );
         },
 
-        codeSent: (String verificationId, int? resendToken) {
-          // Navigate to OTP screen with verificationId
+        codeSent: (String verificationId, int? resendToken) async {
+          // ensure at least 2 seconds loader
+          final elapsed = DateTime.now().difference(startTime);
+          if (elapsed < const Duration(seconds: 2)) {
+            await Future.delayed(const Duration(seconds: 2)) ;
+          }
+
+          if (!mounted) return;
+
+          setState(() => _isLoading = false);
+
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => OTPScreen(
                 phoneNumber: phone,
                 isSignUp: widget.isSignUp,
-                verificationId: verificationId, // Pass it here
+                verificationId: verificationId,
               ),
             ),
           );
         },
 
-        codeAutoRetrievalTimeout: (String verificationId) {
-          // Auto retrieval timeout
-        },
+        codeAutoRetrievalTimeout: (String verificationId) {},
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error sending OTP: $e')),
       );
-    } finally {
       setState(() => _isLoading = false);
     }
   }

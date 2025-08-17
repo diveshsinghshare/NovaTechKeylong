@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:novatech/models/profile_singlaton.dart';
 import 'package:novatech/screens/on_boarding_screens/selectPromptCategoryScreen.dart';
+import 'package:novatech/screens/on_boarding_screens/voice_prompt_screen.dart';
 import 'package:novatech/screens/on_boarding_screens/write_answere_screen.dart';
 import 'package:novatech/main.dart'; // Import the global routeObserver
 
@@ -97,6 +98,8 @@ class _SelectPromptScreenState extends State<SelectPromptScreen> with RouteAware
 
                     return GestureDetector(
                       onTap: () async {
+                        print("prompt.index");
+                        print(prompt.index);
                         if (hasAnswer) {
                           // Already has data → open answer editor
                           final result =
@@ -105,7 +108,7 @@ class _SelectPromptScreenState extends State<SelectPromptScreen> with RouteAware
                             MaterialPageRoute(
                               builder: (_) => WriteAnswerScreen(
                                 question: prompt.question,
-                                answer: prompt.answer,index: index,
+                                answer: prompt.answer,index: prompt.index,isPromtEditMode:true
                               ),
                             ),
                           );
@@ -124,7 +127,7 @@ class _SelectPromptScreenState extends State<SelectPromptScreen> with RouteAware
                             context,
                             MaterialPageRoute(
                               builder: (_) =>
-                               SelectPromptCategoryScreen(index:index),
+                               SelectPromptCategoryScreen(index:prompt.index),
                             ),
                           );
 
@@ -135,7 +138,7 @@ class _SelectPromptScreenState extends State<SelectPromptScreen> with RouteAware
                             context,
                             MaterialPageRoute(
                               builder: (_) => WriteAnswerScreen(
-                               question: '', answer: '',index: index,
+                               question: '', answer: '',index: index,isPromtEditMode:false
                               ),
                             ),
                           );
@@ -230,7 +233,7 @@ class _SelectPromptScreenState extends State<SelectPromptScreen> with RouteAware
                       context,
                       MaterialPageRoute(
                         builder: (_) =>
-                         SelectPromptCategoryScreen(index: 0),
+                            VoicePromptScreen(),
                       ),
                     );
                   }

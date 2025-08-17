@@ -52,7 +52,7 @@ class _NameScreenState extends State<NameScreen> {
               minimumSize: Size.fromHeight(50),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),
-            child: Text("Continue", style: TextStyle(fontWeight: FontWeight.bold)),
+            child: Text("Continue", style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),
           ),
         ]),
       ),

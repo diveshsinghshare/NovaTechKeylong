@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../homescreen.dart';
 import '../../models/profile_singlaton.dart';
+import '../../services/profile_service.dart';
 import '../../services/verify_token_service.dart';
 import 'birthday_screen.dart';
 import 'dart:io';
@@ -24,6 +25,23 @@ class OTPScreen extends StatefulWidget {
 }
 
 class _OTPScreenState extends State<OTPScreen> {
+
+
+
+  Future<void> loadProfile() async {
+    final profile = await ProfileService.fetchProfile(); // from earlier method we wrote
+
+    if (profile != null) {
+      print("Profile loaded: ${profile}, ${profile}");
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+    } else {
+      print("❌ Failed to load profile");
+    }
+  }
+
   final List<TextEditingController> _otpControllers =
   List.generate(6, (_) => TextEditingController());
   final List<FocusNode> _focusNodes = List.generate(6, (_) => FocusNode());
@@ -55,6 +73,7 @@ class _OTPScreenState extends State<OTPScreen> {
       // Get the ID token (Bearer token)
       String? idToken = await userCredential.user?.getIdToken();
       print("Bearer Token: $idToken");
+      ProfileSingleton.instance.token = idToken!;
 
       // Verify token from backend
       final userData = await AuthService.verifyToken(idToken!);
@@ -73,10 +92,8 @@ class _OTPScreenState extends State<OTPScreen> {
             MaterialPageRoute(builder: (context) => BirthdayScreen()),
           );
         } else {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),
-          );
+
+         loadProfile();
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(

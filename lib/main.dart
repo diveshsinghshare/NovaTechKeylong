@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:novatech/screens/on_boarding_screens/consent_screen.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:intl/intl.dart';
@@ -29,7 +30,9 @@ class NovaApp extends StatelessWidget {
         primarySwatch: Colors.deepPurple,
         fontFamily: 'Roboto',
       ),
-      home: OnboardingScreen(),
+      home:
+      //SelectPromptScreen() ,
+      OnboardingScreen(),
       debugShowCheckedModeBanner: false,
       navigatorObservers: [routeObserver], // Attach observer
 
@@ -89,7 +92,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => PhoneNumberScreen(isSignUp: true),
+                  builder: (_) => ConsentScreen(),
                 ),
               );
 
@@ -196,14 +199,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // Skip Button
-            Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 16.0, top: 10),
-                child: Text('Skip', style: TextStyle(color: Colors.grey[700])),
-              ),
-            ),
+            // // Skip Button
+            // Align(
+            //   alignment: Alignment.topRight,
+            //   child: Padding(
+            //     padding: const EdgeInsets.only(right: 16.0, top: 10),
+            //     child: Text('Skip', style: TextStyle(color: Colors.grey[700])),
+            //   ),
+            // ),
+            const SizedBox(height: 40),
+
             Expanded(
               child: PageView.builder(
                 controller: _pageController,

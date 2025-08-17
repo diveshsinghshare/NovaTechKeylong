@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'models/profile_singlaton.dart';
+
 class ProfileTab extends StatelessWidget {
   final double profileCompletion = 0.8;
 
@@ -28,8 +30,8 @@ class ProfileTab extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Text("Divesh, 41 ",
-                                style: TextStyle(
+                    Text(
+                    "${ProfileSingleton.instance.name}, ${ProfileSingleton.instance.dob}", style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold)),
                             Icon(Icons.verified, color: Colors.green, size: 18),
                             SizedBox(width: 4),
@@ -40,7 +42,7 @@ class ProfileTab extends StatelessWidget {
                           ],
                         ),
                         Text(
-                          "Hyderabad, Telangana",
+                          ProfileSingleton.instance.location,
                           style: TextStyle(color: Colors.grey[600]),
                         )
                       ],

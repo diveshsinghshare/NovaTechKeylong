@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:novatech/services/profile_service.dart';
 import 'bio_screen.dart';
 import 'models/profile_singlaton.dart';
 class ProfileCompletionScreen extends StatelessWidget {
@@ -17,37 +18,33 @@ class ProfileCompletionScreen extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12),
-            child: Row(
+            child: Wrap(
+              spacing: 12, // horizontal gap
+              runSpacing: 8, // vertical gap when wrapping
               children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      Icon(Icons.check_circle, color: Colors.green),
-                      SizedBox(width: 4),
-                      Text("Get Started",
-                          style: TextStyle(fontWeight: FontWeight.w500)),
-                    ],
-                  ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.check_circle, color: Colors.green),
+                    SizedBox(width: 4),
+                    Text("Get Started", style: TextStyle(fontWeight: FontWeight.w500)),
+                  ],
                 ),
-                Expanded(
-                  child: Row(
-                    children: [
-                      Icon(Icons.check_circle, color: Colors.green),
-                      SizedBox(width: 4),
-                      Text("Show Your Vibe",
-                          style: TextStyle(fontWeight: FontWeight.w500)),
-                    ],
-                  ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.check_circle, color: Colors.green),
+                    SizedBox(width: 4),
+                    Text("Show Your Vibe", style: TextStyle(fontWeight: FontWeight.w500)),
+                  ],
                 ),
-                Expanded(
-                  child: Row(
-                    children: [
-                      Icon(Icons.radio_button_unchecked, color: Colors.grey),
-                      SizedBox(width: 4),
-                      Text("Complete Your Profile",
-                          style: TextStyle(fontWeight: FontWeight.w500)),
-                    ],
-                  ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.radio_button_unchecked, color: Colors.grey),
+                    SizedBox(width: 4),
+                    Text("Complete Your Profile", style: TextStyle(fontWeight: FontWeight.w500)),
+                  ],
                 ),
               ],
             ),
@@ -98,7 +95,15 @@ class ProfileCompletionScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(24.0),
             child: ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
+
+                bool success = await ProfileService.createProfile(ProfileSingleton.instance.toJson());
+                if (success) {
+                  print("Profile successfully created 🎉");
+                } else {
+                  print("Profile creation failed 🚨");
+                }
+
 
                 Navigator.push(
                   context,
@@ -113,9 +118,10 @@ class ProfileCompletionScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10)),
               ),
               child: Text(
-                "keep the vibe going",
-                style: TextStyle(fontSize: 16),
+                "Keep the vibe going",
+                style: TextStyle(fontSize: 16, color: Colors.white),
               ),
+
             ),
           )
         ],

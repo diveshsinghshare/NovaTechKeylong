@@ -71,6 +71,7 @@ class _OrientationScreenState extends State<OrientationScreen> {
             ),
             SizedBox(height: 20),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Checkbox(
                   value: showOnProfile,
@@ -82,7 +83,12 @@ class _OrientationScreenState extends State<OrientationScreen> {
                   },
                   activeColor: Colors.purple,
                 ),
-                Text("Show my sexual orientation on my profile"),
+                Expanded(
+                  child: Text(
+                    "Show my sexual orientation on my profile",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
               ],
             ),
             Spacer(),

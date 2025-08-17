@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'models/profile_singlaton.dart';
+
 class ProfileViewScreen extends StatelessWidget {
   const ProfileViewScreen({Key? key}) : super(key: key);
 
@@ -55,10 +57,12 @@ class ProfileViewScreen extends StatelessWidget {
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text('Divesh Singh, 41', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              Text('Coder, works at Nova'),
-              Text('Hyderabad, Telangana'),
+            children: [
+
+              Text("${ProfileSingleton.instance.name}, ${ProfileSingleton.instance.dob}",
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              Text(ProfileSingleton.instance.bio),
+              Text(ProfileSingleton.instance.location),
             ],
           ),
         ),
@@ -83,20 +87,20 @@ class ProfileViewScreen extends StatelessWidget {
     return Wrap(
       spacing: 12,
       runSpacing: 12,
-      children: const [
-        InfoTag(text: 'Woman'),
-        InfoTag(text: 'Straight'),
-        InfoTag(text: '160cm'),
-        InfoTag(text: 'MBTI: INTJ'),
-        InfoTag(text: 'Gemini'),
-        InfoTag(text: 'English, Telugu, Hindi'),
+      children: [
+        InfoTag(text: ProfileSingleton.instance.gender),
+         InfoTag(text: ProfileSingleton.instance.sexualOrientation.toString()),
+         InfoTag(text: ProfileSingleton.instance.height),
+         InfoTag(text: ProfileSingleton.instance.mbti),
+         InfoTag(text: ProfileSingleton.instance.religiousBeliefs.toString()),
+         InfoTag(text: ProfileSingleton.instance.linkedProfile),
       ],
     );
   }
 
   Widget _buildBio() {
-    return const Text(
-      'Bio\nA good listener. I love having a good talk to know each other\'s side.',
+    return  Text(
+      'Bio\n $ProfileSingleton.instance.gender',
       style: TextStyle(fontSize: 16),
     );
   }
