@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:novatech/screens/on_boarding_screens/Image_verification_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:novatech/screens/on_boarding_screens/profile_verification_screen.dart';
 
 enum PromptState { selectPrompt, promptSelected, recording, recorded }
 

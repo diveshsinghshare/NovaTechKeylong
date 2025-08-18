@@ -32,6 +32,9 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^5.0.0
   flutter_native_splash: ^2.3.10
+  flutter_launcher_icons: ^0.13.1
+
+
 
 flutter:
   uses-material-design: true
@@ -57,3 +60,16 @@ flutter_native_splash:
   android_gravity: center
   ios_content_mode: center
   fullscreen: true
+
+flutter_launcher_icons: # ✅ new key (not flutter_icons)
+  android: true
+  ios: true
+  image_path: "assets/icon/app_icon.jpg"
+
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/app_icon.jpg"
+
+

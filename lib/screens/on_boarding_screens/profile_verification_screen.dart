@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:novatech/homescreen.dart';
 import '../../models/profile_singlaton.dart';
 
 class VerifyProfileScreen extends StatefulWidget {
@@ -41,6 +42,8 @@ class _VerifyProfileScreenState extends State<VerifyProfileScreen> {
       ProfileSingleton.instance.linkedProfile = _linkedinController.text;
       ProfileSingleton.instance.linkedProfile = _instagramController.text;
 
+    } else {
+      Navigator.push(context, MaterialPageRoute(builder: (_) => HomeScreen()));
     }
   }
 

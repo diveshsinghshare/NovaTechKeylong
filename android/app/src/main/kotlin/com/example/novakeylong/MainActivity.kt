@@ -1,4 +1,4 @@
-package com.example.novakeylong
+package com.divesh.novakeylong
 
 import io.flutter.embedding.android.FlutterActivity
 

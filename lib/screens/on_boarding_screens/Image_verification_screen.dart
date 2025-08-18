@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:novatech/models/profile_singlaton.dart';
+import 'package:novatech/screens/on_boarding_screens/profile_verification_screen.dart';
 import 'package:novatech/screens/on_boarding_screens/video_verification_screen.dart';
 
 class ImageVerificationScreen extends StatefulWidget {
@@ -136,7 +137,7 @@ class _ImageVerificationScreenState extends State<ImageVerificationScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => VideoVerificationScreen(),
+                        builder: (_) => VerifyProfileScreen(),
                       ),
                     );
                   },
