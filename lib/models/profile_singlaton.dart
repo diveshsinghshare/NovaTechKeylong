@@ -23,6 +23,7 @@ class ProfileSingleton {
   String mbti = '';
   String bio = '';
   String height = '';
+  List<String> selectedLanguages = [];
   Set<String> interestedIn = {};
   List<String> novaIntentions = [];
   int id = 0;

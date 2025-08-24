@@ -36,15 +36,15 @@ class _VerifyProfileScreenState extends State<VerifyProfileScreen> {
           : null;
     });
 
-    if (_linkedinError == null && _instagramError == null) {
-      // Continue to next screen
-      print('Continue pressed');
-      ProfileSingleton.instance.linkedProfile = _linkedinController.text;
-      ProfileSingleton.instance.linkedProfile = _instagramController.text;
-
-    } else {
+    // if (_linkedinError == null && _instagramError == null) {
+    //   // Continue to next screen
+    //   print('Continue pressed');
+    //   ProfileSingleton.instance.linkedProfile = _linkedinController.text;
+    //   ProfileSingleton.instance.linkedProfile = _instagramController.text;
+    //
+    // } else {
       Navigator.push(context, MaterialPageRoute(builder: (_) => HomeScreen()));
-    }
+   // }
   }
 
   @override

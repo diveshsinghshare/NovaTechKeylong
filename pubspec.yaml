@@ -52,6 +52,8 @@ flutter:
     - assets/nova_logo.jpg
     - assets/female_code.jpg
     - assets/man_code.jpg
+    - assets/images/block_report.png
+    - assets/images/unmatch.png
 
 
 flutter_native_splash:

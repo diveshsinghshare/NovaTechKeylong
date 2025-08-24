@@ -33,7 +33,7 @@ android {
         applicationId = "com.divesh.novakeylong"
         minSdk = 24
         targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
+        versionCode = 2
         versionName = flutter.versionName
     }
 
